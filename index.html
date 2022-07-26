@@ -20,7 +20,7 @@
     />
     <link rel="stylesheet" href="./css/styles.css" />
   </head>
-  <body>
+  <body data-page>
     <!-- Header section -->
     <header class="header">
       <div class="container main-nav">
@@ -62,7 +62,7 @@
       <section class="hero">
         <div class="container">
           <h1 class="main-title">Эффективные решения для вашего бизнеса</h1>
-          <button class="hero-btn" type="button">Заказать услугу</button>
+          <button class="hero-btn" type="button" data-modal-open>Заказать услугу</button>
         </div>
       </section>
       <!-- Features section -->
@@ -130,6 +130,9 @@
                 width="370"
                 height="294"
               />
+              <div class="about-text">
+                <p class="about-desc">Десктопные приложения</p>
+              </div>
             </li>
             <li class="about-item">
               <img
@@ -139,6 +142,9 @@
                 width="370"
                 height="294"
               />
+              <div class="about-text">
+                <p class="about-desc">Мобильные приложения</p>
+              </div>
             </li>
             <li class="about-item">
               <img
@@ -148,6 +154,9 @@
                 width="370"
                 height="294"
               />
+              <div class="about-text">
+                <p class="about-desc">Дизайнерские решения</p>
+              </div>
             </li>
           </ul>
         </div>
@@ -601,5 +610,16 @@
         </div>
       </div>
     </footer>
+    <!-- Modal window -->
+    <div class="backdrop is-hidden" data-modal>
+      <div class="modal">
+        <button class="modal-btn" data-modal-close>
+          <svg class="modal-btn-icon" width="11" height="11">
+            <use href="./images/icons.svg#icon-close"></use>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <script src="./js/modal.js"></script>
   </body>
 </html>

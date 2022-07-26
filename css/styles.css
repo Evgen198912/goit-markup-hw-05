@@ -55,6 +55,8 @@
   --project-subtitle-txt-cl: #212121;
   --project-txt-cl: #757575;
   --project-tet-border: #eeeeee;
+  /* animation */
+  --animation: 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 body {
@@ -63,6 +65,10 @@ body {
   background-color: var(--header-bg-cl);
   font-size: 14px;
   letter-spacing: 0.03em;
+}
+
+.no-scroll {
+  overflow: hidden;
 }
 
 h1,
@@ -177,8 +183,12 @@ section {
   line-height: 1.14;
   letter-spacing: 0.02em;
   color: var(--main-txt-cl);
+
+  transition: color var(--animation);
 }
 .header-link-active {
+  position: relative;
+
   display: block;
   padding-top: 32px;
   padding-bottom: 32px;
@@ -190,17 +200,19 @@ section {
   letter-spacing: 0.02em;
   color: var(--header-hover-focus-cl);
 }
-.header-link-active {
-  display: block;
-  padding-top: 32px;
-  padding-bottom: 32px;
 
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 1.14;
-  letter-spacing: 0.02em;
-  color: var(--header-hover-focus-cl);
+.header-link-active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  display: block;
+  width: 100%;
+  height: 4px;
+
+  border-radius: 2px;
+  background-color: var(--header-hover-focus-cl);
 }
 
 .contacts-list {
@@ -225,6 +237,8 @@ section {
   line-height: 1.14;
   letter-spacing: 0.02em;
   color: var(--header-contacts-txt-cl);
+
+  transition: color var(--animation);
 }
 
 .contacts-icon {
@@ -296,6 +310,8 @@ section {
   text-align: center;
   letter-spacing: 0.06em;
   color: var(--hero-btn-txt-cl);
+
+  transition: background var(--animation);
 }
 .hero-btn:focus,
 .hero-btn:hover {
@@ -346,6 +362,7 @@ section {
   letter-spacing: 0.03em;
   color: var(--features-txt-cl);
 }
+
 /* About section */
 .about {
   padding-top: 0;
@@ -366,6 +383,20 @@ section {
 
 .about-item {
   width: 370px;
+}
+
+.about-text {
+  width: 100%;
+  height: 70px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transform: translate(0, -100%);
+
+  color: #ffffff;
+  background-color: rgba(47, 48, 58, 0.8);
 }
 
 /* Team section */
@@ -436,10 +467,14 @@ section {
   height: 44px;
   color: var(--socials-link-cl);
   border-radius: 50%;
+
+  transition: background-color var(--animation);
 }
 
 .socials-icon {
   fill: currentColor;
+
+  transition: fill var(--animation);
 }
 
 .socials-link:hover,
@@ -480,10 +515,14 @@ section {
   color: var(--clients-link-cl);
   border: 1px solid var(--clients-link-cl);
   border-radius: 4px;
+
+  transition: border-color var(--animation);
 }
 
 .clients-icon {
   fill: currentColor;
+
+  transition: fill var(--animation);
 }
 
 .clients-link:hover,
@@ -540,6 +579,8 @@ section {
   line-height: 1.7;
   letter-spacing: 0.03em;
   color: var(--footer-map-txt-cl);
+
+  transition: color var(--animation);
 }
 
 .footer-address .footer-item:not(:first-child) {
@@ -555,6 +596,8 @@ section {
   line-height: 1.7;
   letter-spacing: 0.03em;
   color: var(--footer-mail-phone-txt-cl);
+
+  transition: color var(--animation);
 }
 
 .footer-socials {
@@ -593,6 +636,8 @@ section {
   color: var(--footer-link-txt-cl);
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 50%;
+
+  transition: background-color var(--animation);
 }
 
 .footer-icon {
@@ -602,6 +647,58 @@ section {
 .footer-link:hover,
 .footer-link:focus {
   background-color: var(--footer-link-hover-focus);
+}
+
+/* Modal window */
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background-color: rgba(0, 0, 0, 0.2);
+
+  transition: opacity var(--animation), visibility var(--animation);
+}
+
+.backdrop.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 528px;
+  height: 581px;
+  background-color: #ffffff;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.modal-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+
+  width: 30px;
+  height: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: transparent;
+  cursor: pointer;
 }
 
 /* portfolio */
@@ -646,6 +743,8 @@ section {
   line-height: 1.6;
   text-align: center;
   letter-spacing: 0.03em;
+
+  transition: background var(--animation), color var(--animation), box-shadow var(--animation);
 }
 .btn:focus,
 .btn:hover {
@@ -671,12 +770,48 @@ section {
 
 .project-link {
   display: block;
+
+  transition: box-shadow var(--animation);
 }
 
-.project-link:hover,
-.project-link:focus {
-  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06),
-    1px 4px 6px rgba(0, 0, 0, 0.16);
+.project-overlay {
+  position: relative;
+  overflow: hidden;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  transform: translate(0, 100%);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+  padding: 24px;
+
+  background-color: rgba(33, 150, 243, 0.9);
+
+  transition: transform var(--animation);
+}
+
+.overlay-text {
+  color: #ffffff;
+  font-size: 18px;
+  line-height: 28px;
+  letter-spacing: 0.03em;
+
+  text-align: left;
+  user-select: none;
+}
+
+.project-link:hover .overlay,
+.project-link:focus .overlay {
+  transform: translate(0);
 }
 
 .project-text {
@@ -697,4 +832,10 @@ section {
   line-height: 1.9;
   letter-spacing: 0.03em;
   color: var(--project-txt-cl);
+}
+
+.project-link:hover,
+.project-link:focus {
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06),
+    1px 4px 6px rgba(0, 0, 0, 0.16);
 }
